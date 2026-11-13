@@ -2,6 +2,8 @@ Buchstabenbattle
 ================
 
 Partyspiel für 2 bis 8 Personen, jeder auf seinem eigenen Handy, ohne Konto und ohne App.
+Online: https://richard-xlsx.github.io/buchstabenbattle/ (GitHub Pages, Projekt github.com/Richard-xlsx/buchstabenbattle).
+Änderungen werden mit Git hochgeladen (Autor mit anonymer GitHub-Adresse); nach ca. einer Minute ist die neue Fassung online.
 Ein Buchstabe, fünf Kategorien: Song, Promi, Film, Ausrede fürs Zuspätkommen, Was man um 3 Uhr nachts googelt.
 
 Dateien
