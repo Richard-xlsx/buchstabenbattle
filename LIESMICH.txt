@@ -40,5 +40,14 @@ Wenn etwas ausfällt
   - Der Spielleiter kommt gar nicht zurück: Nach 20 Sekunden erscheint bei allen „Spielleitung übernehmen“.
     Wer tippt, führt das Spiel mit dem letzten Stand weiter.
 
+Zweites Spiel: Stille Post mit Bildern (stillepost.html, stillepost-logic.js, stillepost.js)
+  Online: https://richard-xlsx.github.io/buchstabenbattle/stillepost.html (auch verlinkt auf der Startseite)
+  3 bis 8 Personen. Jeder schreibt einen Startsatz. Dann wandern die Ketten reihum: der Nächste malt den Satz, der Nächste
+  beschreibt das Bild, und so weiter, bis jeder an jeder Kette einmal dran war. Alle arbeiten gleichzeitig.
+  Tempo: Entspannt 60 s Text / 120 s Malen, Normal 40/80, Schnell 30/60. Läuft die Zeit ab, wird abgegeben, was da ist.
+  Danach Diashow, die der Spielleiter durchblättert; Bilder malen sich dabei neu auf. ♥ für Lieblingssätze und -bilder,
+  am Ende gewinnt, wer die meisten Herzen hat. Bilder werden als Striche gespeichert (höchstens 4000 Punkte je Bild).
+  Wiederverbindung und „Spielleitung übernehmen“ wie beim Buchstabenbattle; angefangene Bilder bleiben beim Neuladen erhalten.
+
 Getestet am 13.11.2026 mit drei simulierten Spielern im Browser (Runde, STOPP, Abstimmung, Punkte, Neuladen eines Mitspielers,
 Neuladen der Spielleiterin, Übernahme der Spielleitung). Noch nicht auf echten Handys.

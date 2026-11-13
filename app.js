@@ -236,7 +236,8 @@
         <button class="knopf" id="neu">Raum erstellen</button></div>
       <div class="karte"><h2>Mitspielen</h2>
         <label class="feld">Raumcode<input id="code" maxlength="4" autocapitalize="characters" placeholder="z. B. K7M2"></label>
-        <button class="knopf zweit" id="beitreten">Beitreten</button></div>`;
+        <button class="knopf zweit" id="beitreten">Beitreten</button></div>
+      <a class="link" href="stillepost.html">Noch ein Spiel: Stille Post mit Bildern</a>`;
   }
   function bildschirmName() {
     return `<header class="titel"><h1>Buch&shy;staben&shy;battle</h1><p class="leise">Du wurdest in Raum <b>${esc(code)}</b> eingeladen.</p></header>
