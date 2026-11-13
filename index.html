@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Buchstabenbattle">
+<meta name="theme-color" content="#1C1A33">
+<title>Buchstabenbattle</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@600;800&family=Inter:wght@400;500;600;700&display=swap">
+<style>
+/* Ein Partyspiel am Abend: dunkles Tintenblau, Buchstabe als gelbe Spielkarte, Korall für Aktionen */
+:root{
+  --bg:#1C1A33; --flaeche:#272447; --flaeche2:#322E5A; --text:#F3F0FF; --leise:#A8A2CC; --linie:#3D3868;
+  --akzent:#FF6B57; --akzent-text:#1C1A33; --karte-gelb:#FFD447; --gut:#5BD69A; --schlecht:#FF8A7A;
+  --display:"Unbounded","Segoe UI",system-ui,sans-serif; --fliess:"Inter","Segoe UI",system-ui,sans-serif;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--text);font:16px/1.45 var(--fliess);-webkit-text-size-adjust:100%}
+body{padding:max(14px,env(safe-area-inset-top)) max(16px,env(safe-area-inset-right)) max(24px,env(safe-area-inset-bottom)) max(16px,env(safe-area-inset-left))}
+#app{max-width:520px;margin:0 auto;display:flex;flex-direction:column;gap:16px}
+h1,h2{font-family:var(--display);margin:0;letter-spacing:-.01em;text-wrap:balance}
+h1{font-size:2rem;line-height:1.1;font-weight:800}
+h2{font-size:1.05rem;font-weight:600}
+.titel{display:flex;flex-direction:column;gap:6px;padding-top:8px}
+.leise{color:var(--leise);margin:0}
+.klein{font-size:.85rem}
+.mitte{text-align:center}
+.etikett{font-size:.72rem;text-transform:uppercase;letter-spacing:.1em;color:var(--leise);font-weight:600;margin:0}
+.karte{background:var(--flaeche);border:1px solid var(--linie);border-radius:18px;padding:16px;display:flex;flex-direction:column;gap:12px}
+.feld{display:flex;flex-direction:column;gap:6px;font-size:.85rem;color:var(--leise);font-weight:500}
+.feld input{font:500 1.05rem var(--fliess);color:var(--text);background:var(--flaeche2);border:1px solid var(--linie);border-radius:12px;padding:13px 14px;width:100%;outline:none}
+.feld input:focus{border-color:var(--akzent)}
+.knopf{appearance:none;border:0;border-radius:14px;padding:15px 18px;font:700 1rem var(--fliess);background:var(--akzent);color:var(--akzent-text);width:100%;cursor:pointer}
+.knopf.zweit{background:transparent;color:var(--text);border:1px solid var(--linie)}
+.knopf:disabled{opacity:.45;cursor:default}
+.knopf.stopp{font-family:var(--display);font-size:1.4rem;letter-spacing:.04em;padding:18px}
+button:focus-visible,input:focus-visible{outline:3px solid var(--karte-gelb);outline-offset:2px}
+.reihe{display:flex;gap:10px}
+.wahl{display:flex;gap:8px}
+.wahl button,.klein{appearance:none;border:1px solid var(--linie);background:var(--flaeche2);color:var(--text);border-radius:999px;padding:8px 14px;font:600 .9rem var(--fliess);cursor:pointer}
+.wahl button{flex:1}
+.wahl button.an,.klein.an{background:var(--text);color:var(--bg);border-color:var(--text)}
+.link{background:none;border:0;color:var(--leise);text-decoration:underline;font:inherit;cursor:pointer;padding:8px;align-self:center}
+.code{font-family:var(--display);font-weight:800;font-size:3.4rem;letter-spacing:.12em;line-height:1}
+.qr{background:#fff;border-radius:16px;padding:10px;width:200px;max-width:60%;align-self:center}
+.qr svg{display:block;width:100%;height:auto}
+.spieler{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+.spieler li{display:flex;align-items:center;gap:10px;font-weight:600}
+.spieler small{color:var(--leise);font-weight:500}
+.punkt{width:10px;height:10px;border-radius:50%;background:var(--linie);display:inline-block}
+.punkt.an{background:var(--gut)}
+.kats{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:4px}
+.status{position:sticky;top:0;z-index:5;background:var(--karte-gelb);color:var(--bg);border-radius:12px;padding:10px 12px;font-weight:600;font-size:.9rem;display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.status .klein{background:var(--bg);color:var(--text);border-color:var(--bg)}
+.spielkopf{display:flex;align-items:center;gap:16px}
+.buchstabe{font-family:var(--display);font-weight:800;font-size:3.6rem;line-height:1;width:92px;height:110px;border-radius:16px;background:var(--karte-gelb);color:var(--bg);display:grid;place-items:center;box-shadow:0 6px 0 rgba(0,0,0,.25);transform:rotate(-3deg);flex:none}
+.zeit{font-family:var(--display);font-size:2rem;font-weight:600;font-variant-numeric:tabular-nums}
+.stoppinfo{background:var(--akzent);color:var(--akzent-text);font-family:var(--display);font-weight:800;border-radius:14px;padding:14px;text-align:center;font-size:1.15rem}
+.felder{display:flex;flex-direction:column;gap:12px}
+.unten{position:sticky;bottom:0;padding-block:12px calc(4px + env(safe-area-inset-bottom));background:linear-gradient(transparent,var(--bg) 35%);display:flex;flex-direction:column;gap:8px}
+.antworten{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
+.antworten li{background:var(--flaeche2);border-radius:12px;padding:10px 12px;display:flex;flex-direction:column;gap:4px}
+.antworten li.aus .text{text-decoration:line-through;color:var(--leise)}
+.zeile1{display:flex;align-items:center;gap:8px}
+.zeile1 .pkt{margin-left:auto;font-weight:700;font-variant-numeric:tabular-nums}
+.marke{font-size:.75rem;background:var(--linie);border-radius:999px;padding:2px 8px;color:var(--text)}
+.text{font-size:1.05rem}
+.knoepfe{display:flex;gap:8px;margin-top:2px}
+.rang{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+.rang li{display:flex;align-items:center;gap:12px;background:var(--flaeche);border:1px solid var(--linie);border-radius:14px;padding:12px 14px;font-variant-numeric:tabular-nums}
+.rang .platz{font-family:var(--display);font-weight:800;width:1.5em;color:var(--leise)}
+.rang li:first-child .platz{color:var(--karte-gelb)}
+.rang .n{flex:1;font-weight:600}
+.rang .plus{color:var(--gut);font-weight:600}
+.rang b{font-family:var(--display);font-size:1.15rem}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<main id="app" aria-live="polite"><p class="leise">Lädt …</p></main>
+<script src="https://cdn.jsdelivr.net/npm/peerjs@1.5.4/dist/peerjs.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.js"></script>
+<script src="logic.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

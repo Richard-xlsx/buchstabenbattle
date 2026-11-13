@@ -1,0 +1,42 @@
+Buchstabenbattle
+================
+
+Partyspiel für 2 bis 8 Personen, jeder auf seinem eigenen Handy, ohne Konto und ohne App.
+Ein Buchstabe, fünf Kategorien: Song, Promi, Film, Ausrede fürs Zuspätkommen, Was man um 3 Uhr nachts googelt.
+
+Dateien
+  index.html   Seite mit Aussehen
+  logic.js     Spielregeln und Punkte
+  app.js       Verbindung zwischen den Handys und Bildschirme
+Für die Website werden genau diese drei Dateien hochgeladen (LIESMICH.txt kann mit, schadet nicht).
+
+So läuft ein Spiel
+  1. Einer öffnet die Seite, gibt seinen Namen ein und tippt auf „Raum erstellen“ (3, 5 oder 8 Runden; 2, 3 oder 4 Minuten).
+  2. Die anderen scannen den QR-Code oder öffnen den geteilten Link, geben ihren Namen ein und tippen auf „Mitspielen“.
+  3. Jeder füllt die fünf Kategorien mit dem gezogenen Buchstaben. Wer alle fünf hat, darf STOPP drücken, dann haben alle noch 10 Sekunden.
+  4. Auswertung: 👎 bei Quatsch (lehnt die Mehrheit der anderen ab, gibt es 0 Punkte), ♥ für die Lieblingsantwort.
+
+Punkte
+  allein gültig in der Kategorie 20 · einzigartig 10 · gleiche Antwort wie jemand anderes 5
+  leer, falscher Anfangsbuchstabe oder abgelehnt 0 · meiste Herzen in einer Kategorie +5
+  Ohne C, Q, X und Y.
+
+Verbindung (Handy des Spielleiters ist der Server)
+  - Die Handys verbinden sich direkt miteinander. Zum Finden nutzt die Seite den kostenlosen Vermittlungsdienst PeerJS
+    (0.peerjs.com), ohne Konto. Bibliotheken kommen von cdn.jsdelivr.net (peerjs 1.5.4, qrcode-generator 1.4.4).
+  - Am besten sind alle im selben WLAN. Klappt über Mobilfunk keine direkte Verbindung, leitet PeerJS die (verschlüsselten)
+    Daten über seine kostenlosen Relais-Server (eu-0.turn.peerjs.com) um. Ob die immer erreichbar sind, ist nicht garantiert.
+  - Wer was sieht: Hoster, jsDelivr, Google Fonts und PeerJS sehen die IP-Adressen der Besucher. Namen und Antworten gehen
+    nur zwischen den Handys (WebRTC, verschlüsselt) und liegen nur dort im Speicher des Browsers.
+  - Die Seite hält den Bildschirm an, solange sie offen ist (iPhone ab iOS 16.4).
+  - Nicht im privaten Safari-Fenster spielen: Dort wird der Zwischenstand nicht dauerhaft gespeichert.
+
+Wenn etwas ausfällt
+  - Ein Mitspieler fällt aus: Seite wieder öffnen, er ist automatisch wieder drin, seine Antworten der laufenden Runde auch.
+  - Der Spielleiter fällt aus: Seite wieder öffnen, „Spiel fortsetzen“ geht von selbst, alle verbinden sich neu.
+    Die Uhr steht so lange still. Direkt nach einem Absturz kann der Raum bis zu etwa einer Minute belegt sein, die Seite versucht es weiter.
+  - Der Spielleiter kommt gar nicht zurück: Nach 20 Sekunden erscheint bei allen „Spielleitung übernehmen“.
+    Wer tippt, führt das Spiel mit dem letzten Stand weiter.
+
+Getestet am 13.11.2026 mit drei simulierten Spielern im Browser (Runde, STOPP, Abstimmung, Punkte, Neuladen eines Mitspielers,
+Neuladen der Spielleiterin, Übernahme der Spielleitung). Noch nicht auf echten Handys.
